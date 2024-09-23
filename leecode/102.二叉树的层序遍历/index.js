@@ -46,4 +46,4 @@ const root = {
   },
 };
 
-console.log(levelOrder([]));
+console.log(levelOrder(root)); // [ [ 3 ], [ 9, 20 ], [ 15, 7 ] ]
