@@ -1,0 +1,72 @@
+<html>
+  <head></head>
+  <body>
+    <div>
+      <span>f</span>
+      <span>o</span>
+      <span>o</span>
+    </div>
+  </body>
+  <script>
+    function traverse(root) {
+      let totalElementsCount = 0; // 元素节点的数量总和
+      let maxDOMTreeDepth = 0; // 最大嵌套深度
+      let maxChildrenCount = 0; // 最大子元素个数
+
+      function loop(node, deepth = 0) {
+        if (!node) return;
+        deepth++;
+        maxDOMTreeDepth = Math.max(maxDOMTreeDepth, deepth);
+        const children = node.children;
+        if (children) {
+          totalElementsCount += children.length;
+          maxChildrenCount = Math.max(maxChildrenCount, children.length);
+          for (let i = 0; i < children.length; i++) {
+            loop(children[i], deepth);
+          }
+        }
+      }
+
+      loop(root);
+
+      return {
+        totalElementsCount,
+        maxDOMTreeDepth,
+        maxChildrenCount,
+      };
+    }
+
+    function traverseDOM(root) {
+      const stats = {
+        totalElementsCount: 0, // 元素节点的数量总和
+        maxDOMTreeDepth: 0, // 最大嵌套深度
+        maxChildrenCount: 0, // 最大子元素个数
+      };
+
+      function loop(node, path = []) {
+        if (!node) return;
+
+        const children = node.children;
+        stats.totalElementsCount += children.length;
+        stats.maxDOMTreeDepth = Math.max(stats.maxDOMTreeDepth, path.length);
+        stats.maxChildrenCount = Math.max(
+          stats.maxChildrenCount,
+          children.length
+        );
+
+        for (let i = 0; i < children.length; i++) {
+          const node = children[i];
+          loop(node, path.concat(node));
+        }
+      }
+
+      loop(root, [root]);
+
+      return stats;
+    }
+
+    const root = document.documentElement;
+    console.log("===traverse===", traverse(root));
+    console.log("===traverseDOM===", traverseDOM(root));
+  </script>
+</html>
