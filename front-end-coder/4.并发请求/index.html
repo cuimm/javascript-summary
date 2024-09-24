@@ -1,0 +1,73 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module">
+      import axios from "/node_modules/axios/dist/esm/axios.js";
+
+      function getData(url) {
+        return axios.get(url).then((res) => {
+          return res.data;
+        });
+      }
+
+      function sendRequest(urls = [], max, callback = () => {}) {
+        const stack = urls;
+        const totalCount = urls.length;
+        let pendingCount = 0;
+        let completeCount = 0;
+
+        function request() {
+          while (
+            completeCount < totalCount &&
+            pendingCount < max &&
+            stack.length
+          ) {
+            const url = stack.shift();
+            pendingCount++;
+
+            getData(url).finally(() => {
+              pendingCount--;
+              completeCount++;
+              if (completeCount >= totalCount) {
+                return callback();
+              } else {
+                request();
+              }
+            });
+          }
+        }
+
+        request();
+      }
+
+      const baseUrl = "http://localhost:8082";
+      const urls = [
+        `${baseUrl}/user/cuimm1`,
+        `${baseUrl}/user/cuimm2`,
+        `${baseUrl}/user/cuimm3`,
+        `${baseUrl}/user/cuimm4`,
+        `${baseUrl}/user/cuimm5`,
+        `${baseUrl}/user/cuimm6`,
+        `${baseUrl}/user/cuimm7`,
+        `${baseUrl}/user/cuimm8`,
+        `${baseUrl}/user/cuimm9`,
+        `${baseUrl}/user/cuimm10`,
+        `${baseUrl}/user/cuimm11`,
+        `${baseUrl}/user/cuimm12`,
+        `${baseUrl}/user/cuimm13`,
+        `${baseUrl}/user/cuimm14`,
+        `${baseUrl}/user/cuimm15`,
+        `${baseUrl}/user/cuimm16`,
+      ];
+      const max = 3;
+
+      sendRequest(urls, 3, () => {
+        console.log("请求完成");
+      });
+    </script>
+  </body>
+</html>
