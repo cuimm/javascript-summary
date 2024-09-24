@@ -1,38 +1,28 @@
 const axios = require("axios");
 
-function getData(url) {
-  return axios.get(url).then((res) => {
-    console.log(res.data);
-    return res.data;
-  });
-}
-
 function sendRequest(urls = [], max, callback = () => {}) {
-  const stack = urls;
-  const pendingUrls = [];
-  const succeedUrls = [];
+  const totalCount = urls.length;
   let pendingCount = 0;
-  let completeCount = 0;
+  let succeedCount = 0;
+  const stack = urls;
 
-  function request() {
-    while (pendingCount < max) {
+  function doRequest() {
+    while (stack.length && pendingCount < max) {
       const url = stack.shift();
       pendingCount++;
-
-      getData(url).finally(() => {
+      axios.get(url).finally(() => {
         pendingCount--;
-        completeCount++;
-        if (completeCount === urls.length) {
-          return callback();
-        }
-        if (pendingCount < max) {
-          request();
+        succeedCount++;
+        if (succeedCount === totalCount) {
+          callback();
+        } else {
+          doRequest();
         }
       });
     }
   }
 
-  request();
+  doRequest();
 }
 
 const baseUrl = "http://localhost:8082";
@@ -52,6 +42,7 @@ const urls = [
   `${baseUrl}/user/cuimm13`,
   `${baseUrl}/user/cuimm14`,
   `${baseUrl}/user/cuimm15`,
+  `${baseUrl}/user/cuimm16`,
 ];
 const max = 3;
 

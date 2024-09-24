@@ -11,6 +11,8 @@ app.get("/user/?:name", (req, res) => {
   }
 
   setTimeout(() => {
+    console.log("response data:", name);
+
     res.send({
       name: name,
       timestamp: Date.now(),

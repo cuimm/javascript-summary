@@ -21,11 +21,7 @@
         let completeCount = 0;
 
         function request() {
-          while (
-            completeCount < totalCount &&
-            pendingCount < max &&
-            stack.length
-          ) {
+          while (pendingCount < max && stack.length) {
             const url = stack.shift();
             pendingCount++;
 
