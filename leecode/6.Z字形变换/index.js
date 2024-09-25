@@ -18,6 +18,6 @@ var convert = function (s, numRows) {
   return result.reduce((memo, next) => memo + next, "");
 };
 
-// console.log(convert("PAYPALISHIRING", 3));
-// console.log(convert("PAYPALISHIRING", 4));
-console.log(convert("AB", 1));
+console.log(convert("PAYPALISHIRING", 3)); // PAHNAPLSIIGYIR
+console.log(convert("PAYPALISHIRING", 4)); // PINALSIGYAHRPI
+console.log(convert("AB", 1)); // AB

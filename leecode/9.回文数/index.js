@@ -40,6 +40,6 @@ var isPalindrome = function (x) {
   return result;
 };
 
-console.log(isPalindrome(121));
-console.log(isPalindrome(123));
-console.log(isPalindrome(10));
+console.log(isPalindrome(121)); // true
+console.log(isPalindrome(123)); // false
+console.log(isPalindrome(10)); // false
