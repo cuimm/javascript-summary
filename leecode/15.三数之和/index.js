@@ -20,8 +20,8 @@ var threeSum = function (nums) {
       const sum = nums[i] + nums[left] + nums[right];
       if (sum === 0) {
         result.push([nums[i], nums[left], nums[right]]);
-        while (left < right && nums[left] === nums[left + 1]) left++;
-        while (left < right && nums[right] === nums[right - 1]) right--;
+        while (left < right && nums[left] === nums[left + 1]) left++; // 去重
+        while (left < right && nums[right] === nums[right - 1]) right--; // 去重
         left++;
         right--;
       } else if (sum < 0) {
