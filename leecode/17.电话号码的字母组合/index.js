@@ -7,12 +7,14 @@
  *
  * 子问题和原问题是相似的，这种从原问题到子问题的过程，适合用“递归”解决。
  *
- * 回溯有一个增量构造答案的问题，这个过程通常用“递归”实现。
+ * 【回溯】有一个增量构造答案的问题，这个过程通常用“递归”实现。
+ *
+ * 构造清楚上述问题之后，剩下的交给【数学归纳法】
  *
  * @param {string} digits
  * @return {string[]}
  */
-var letterCombinations = function (digits) {
+var letterCombinations1 = function (digits) {
   const mapping = {
     2: ["a", "b", "c"],
     3: ["d", "e", "f"],
@@ -111,7 +113,37 @@ var letterCombinations3 = function (digits) {
   });
 };
 
+var letterCombinations = function (digits) {
+  const mapping = {
+    2: ["a", "b", "c"],
+    3: ["d", "e", "f"],
+    4: ["g", "h", "i"],
+    5: ["j", "k", "l"],
+    6: ["m", "n", "o"],
+    7: ["p", "q", "r", "s"],
+    8: ["t", "u", "v"],
+    9: ["w", "x", "y", "z"],
+  };
+  const result = [];
+  const level = digits.length;
+
+  function traverse(i, path = []) {
+    if (i === level) {
+      result.push(path.slice().join(""));
+      return;
+    }
+    const letters = mapping[digits[i]];
+    for (let index = 0; index < letters.length; index++) {
+      traverse(i + 1, path.concat(letters[index]));
+    }
+  }
+
+  traverse(0);
+
+  return result;
+};
+
 console.log(letterCombinations("23")); // ["ad","ae","af","bd","be","bf","cd","ce","cf"]
-// console.log(letterCombinations("")); // []
-// console.log(letterCombinations("2")); // ["a","b","c"]
-// console.log(letterCombinations("234"));
+console.log(letterCombinations("")); // []
+console.log(letterCombinations("2")); // ["a","b","c"]
+console.log(letterCombinations("234"));
