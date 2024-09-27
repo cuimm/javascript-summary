@@ -27,7 +27,7 @@ var subsets2 = function (nums) {
   return ans;
 };
 
-var subsets = function (nums) {
+var subsets3 = function (nums) {
   const n = nums.length;
   const ans = [];
 
@@ -44,6 +44,27 @@ var subsets = function (nums) {
   dfs(0);
 
   return ans;
+};
+
+/**
+ * 从结果出发
+ */
+var subsets = function (nums) {
+  const result = [];
+  const n = nums.length;
+
+  function dfs(i, path = []) {
+    result.push(path.slice()); // 递归到的每一个都加入结果集
+    if (i === n) {
+      return;
+    }
+    for (let index = i; index < n; index++) {
+      dfs(index + 1, path.concat(nums[index]));
+    }
+  }
+
+  dfs(0);
+  return result;
 };
 
 console.log(subsets([1, 2, 3])); // [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
