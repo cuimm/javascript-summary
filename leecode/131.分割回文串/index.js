@@ -57,7 +57,7 @@ var partition = function (s) {
     }
     for (let j = i; j < n; j++) {
       const str = s.slice(i, j + 1);
-      traverse(j + 1, path.concat(str));
+      traverse(j + 1, path.concat(str)); // 遍历：从当前位置开始到字符串结束位置
     }
   }
   traverse(0);
