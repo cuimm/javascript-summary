@@ -14,15 +14,18 @@
 var generateParenthesis = function (n) {
   const res = [];
   function dfs(leftRemain, rightRemain, str = "") {
-    if (str.length === 2 * n) {
+    if (leftRemain === 0 && rightRemain === 0) {
+      // 递归结束条件
       res.push(str);
       return;
     }
     if (leftRemain > 0) {
-      dfs(--leftRemain, rightRemain, str + "(");
+      // 左括号有剩余，就可以选择左括号
+      dfs(leftRemain - 1, rightRemain, str + "(");
     }
     if (rightRemain > leftRemain) {
-      dfs(leftRemain, --rightRemain, str + ")");
+      // 右括号剩余比左括号多，才可以选择左括号
+      dfs(leftRemain, rightRemain - 1, str + ")");
     }
   }
   dfs(n, n);
@@ -30,4 +33,4 @@ var generateParenthesis = function (n) {
 };
 
 console.log(generateParenthesis(1));
-// console.log(generateParenthesis(3));
+console.log(generateParenthesis(3));
