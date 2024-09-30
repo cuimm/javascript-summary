@@ -46,9 +46,9 @@ var nextPermutation = function (nums) {
   return nums;
 };
 
-// console.log(nextPermutation([1, 5, 2, 4, 3, 2])); // [ 1, 5, 3, 2, 2, 4 ]
-// console.log(nextPermutation([1, 2, 3])); // [ 1, 3, 2 ]
-// console.log(nextPermutation([3, 2, 1])); // [1, 2, 3]
-// console.log(nextPermutation([1, 1, 5])); // [ 1, 5, 1 ]
-// console.log(nextPermutation([1, 3, 2])); // [ 2, 1, 3 ]
+console.log(nextPermutation([1, 5, 2, 4, 3, 2])); // [ 1, 5, 3, 2, 2, 4 ]
+console.log(nextPermutation([1, 2, 3])); // [ 1, 3, 2 ]
+console.log(nextPermutation([3, 2, 1])); // [1, 2, 3]
+console.log(nextPermutation([1, 1, 5])); // [ 1, 5, 1 ]
+console.log(nextPermutation([1, 3, 2])); // [ 2, 1, 3 ]
 console.log(nextPermutation([5, 1, 1])); // [1, 1, 5]
