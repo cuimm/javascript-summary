@@ -58,5 +58,5 @@ const root2 = {
   },
 };
 
-console.log(minDepth(root));
-console.log(minDepth(root2));
+console.log(minDepth(root)); // 2
+console.log(minDepth(root2)); // 5
