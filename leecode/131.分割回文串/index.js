@@ -24,13 +24,20 @@ var partition2 = function (s) {
   const result = [];
   const n = s.length;
 
+  /**
+   *
+   * @param {*} i
+   * @param {*} start 当前这段回文子串的开始位置
+   * @param {*} path
+   * @returns
+   */
   function traverse(i, start, path = []) {
     if (i === n) {
       result.push(path.slice());
       return;
     }
     if (i + 1 < n) {
-      traverse(i + 1, start, path); // 不选择 i 和 i+1 之间的逗号
+      traverse(i + 1, start, path); // 不选择 i 和 i+1 之间的逗号（i=n-1时一定要选）
     }
     if (isPalindrome(s.slice(start, i + 1))) {
       traverse(i + 1, i + 1, path.concat(s.slice(start, i + 1))); // 选择 i和i+1 之间的逗号
