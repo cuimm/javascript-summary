@@ -33,6 +33,30 @@ var hasPathSum = function (root, targetSum) {
   return result;
 };
 
+var hasPathSum = function (root, targetSum) {
+  if (!root) return false;
+  if (!root.left && !root.right) {
+    return targetSum - root.val === 0;
+  }
+  return (
+    hasPathSum(root.left, targetSum - root.val) ||
+    hasPathSum(root.right, targetSum - root.val)
+  );
+};
+
+var hasPathSum = function (root, targetSum, sum = 0) {
+  if (!root) {
+    return false;
+  }
+  if (!root.left && !root.right) {
+    return targetSum - root.val === sum;
+  }
+  return (
+    hasPathSum(root.left, targetSum, sum + root.val) ||
+    hasPathSum(root.right, targetSum, sum + root.val)
+  );
+};
+
 const root = {
   val: 5,
   left: {
